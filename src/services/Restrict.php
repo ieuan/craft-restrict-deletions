@@ -120,7 +120,7 @@ class Restrict extends Component
             ->select(['relations.id'])
             ->from(['relations' => Table::RELATIONS])
             ->leftJoin(['elements' => Table::ELEMENTS], '[[elements.id]] = [[relations.sourceId]]')
-            ->where(['targetId' => $element->id]);
+            ->where(['targetId' => $element->id, '[[elements.dateDeleted]]' => null]);
         if ($policy == self::POLICY_NO_REVISIONS or $policy == self::POLICY_NO_DRAFTS_OR_REVISIONS) {
             $query->andWhere('[[elements.revisionId]] is NULL');
         }
